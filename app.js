@@ -32,11 +32,21 @@ var water = new itemPic('water-can', 'images/water-can.jpg');
 var wine = new itemPic('wine glass', 'images/wine-glass.jpg');
 
 function choosePic() {
-  var randomNum1 = Math.floor(Math.random() * picListArray.length);
-  var randomNum2 = Math.floor(Math.random() * picListArray.length);
-  var randomNum3 = Math.floor(Math.random() * picListArray.length);
+  var randomNum1;
+  var randomNum2 = getRandom(picListArray);
+  var randomNum3 = getRandom(picListArray);
+  randomNum1 = getRandom(picListArray);
+  while (randomNum2 == randomNum1){
+    randomNum2 = getRandom(picListArray);
+  }
+  while (randomNum3 == randomNum2 || randomNum3 == randomNum1){
+    randomNum3 = getRandom(picListArray);
+  }
   document.getElementById('Picture1').src = picListArray[randomNum1].imagePath;
   document.getElementById('Picture2').src = picListArray[randomNum2].imagePath;
   document.getElementById('Picture3').src = picListArray[randomNum3].imagePath;
 }
 choosePic();
+function getRandom(arr) {
+  return Math.floor(Math.random() * arr.length);
+}
