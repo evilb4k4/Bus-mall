@@ -1,0 +1,11 @@
+*{
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+header{
+    width: 764px;
+    height: 246px;
+    margin: auto;
+    background-image: url(bus.jpg);
+}

@@ -1,5 +1,5 @@
 'use strict';
-var picListArray = [];
+var picInfoArray = [];
 var pictureNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'drangon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
 function itemPic(itemName, imagePath){
@@ -7,7 +7,7 @@ function itemPic(itemName, imagePath){
   this.imagePath = imagePath;
   this.imageClick = 0;
   this.imageShown = 0;
-  picListArray.push(this);
+  picInfoArray.push(this);
 };
 
 var bag = new itemPic('bag', 'images/bag.jpg');
@@ -33,20 +33,26 @@ var wine = new itemPic('wine glass', 'images/wine-glass.jpg');
 
 function choosePic() {
   var randomNum1;
-  var randomNum2 = getRandom(picListArray);
-  var randomNum3 = getRandom(picListArray);
-  randomNum1 = getRandom(picListArray);
+  var randomNum2 = getRandom(picInfoArray);
+  var randomNum3 = getRandom(picInfoArray);
+  randomNum1 = getRandom(picInfoArray);
   while (randomNum2 == randomNum1){
-    randomNum2 = getRandom(picListArray);
+    randomNum2 = getRandom(picInfoArray);
   }
   while (randomNum3 == randomNum2 || randomNum3 == randomNum1){
-    randomNum3 = getRandom(picListArray);
+    randomNum3 = getRandom(picInfoArray);
   }
-  document.getElementById('Picture1').src = picListArray[randomNum1].imagePath;
-  document.getElementById('Picture2').src = picListArray[randomNum2].imagePath;
-  document.getElementById('Picture3').src = picListArray[randomNum3].imagePath;
+  document.getElementById('Picture1').src = picInfoArray[randomNum1].imagePath;
+  document.getElementById('Picture2').src = picInfoArray[randomNum2].imagePath;
+  document.getElementById('Picture3').src = picInfoArray[randomNum3].imagePath;
 }
 choosePic();
 function getRandom(arr) {
   return Math.floor(Math.random() * arr.length);
 }
+function onClick(event) {
+  choosePic();
+}
+Picture1.addeventlistener('click', onClick);
+Picture2.addeventlistener('click', onClick);
+Picture3.addeventlistener('click', onClick);
