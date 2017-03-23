@@ -63,20 +63,46 @@ function onClick(event) {
     productClicks();
     console.log('it works');
   }
+
+}
+
+////// chart.js
+
+// for(var i = 0; i < picInfoArray.length; i++){
+//   pictureNames.push(picInfoArray[i].itemName);
+// };
+function productClicks() {
+  var clickResults = [];
+  for(var i = 0; i < picInfoArray.length; i++){
+    clickResults.push(picInfoArray[i].imageClick);
+  };
+  console.log('click results', clickResults);
+
+  var ctx = canvas.getContext('2d');
+  var data = {
+    labels: pictureNames,
+    datasets: [{
+      label: 'Favorite Items',
+      data: clickResults,
+      backgroundColor: 'red'
+    }],
+  };
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true,
+            // max: 100
+          }
+        }]
+      }
+    }
+  });
 };
 
 Picture1.addEventListener('click', onClick);
 Picture2.addEventListener('click', onClick);
 Picture3.addEventListener('click', onClick);
-
-function productClicks(){
-  var content = document.getElementById('content');
-  var ul = document.createElement('ul');
-  content.appendChild(ul);
-  for (var i = 0; i < picInfoArray.length; i++) {
-    var li = document.createElement('li');
-    var dataStr = picInfoArray[i].imageClick + ' clicks for ' + picInfoArray[i].itemName;
-    li.innerText = dataStr;
-    ul.appendChild(li);
-  }
-}
