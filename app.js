@@ -63,31 +63,46 @@ function onClick(event) {
     productClicks();
     console.log('it works');
   }
-  function productClicks() {
-    var ctx = canvas.getContext('2d');
-    var data = {
-      labels: pictureNames,
-      datasets: [{
-        label: 'Favorite Items',
-        data: picInfoArray,
-        backgroundColor: 'red'
-      }],
-    };
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: data,
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero:true
-            }
-          }]
-        }
+
+}
+
+////// chart.js
+
+// for(var i = 0; i < picInfoArray.length; i++){
+//   pictureNames.push(picInfoArray[i].itemName);
+// };
+function productClicks() {
+  var clickResults = [];
+  for(var i = 0; i < picInfoArray.length; i++){
+    clickResults.push(picInfoArray[i].imageClick);
+  };
+  console.log('click results', clickResults);
+
+  var ctx = canvas.getContext('2d');
+  var data = {
+    labels: pictureNames,
+    datasets: [{
+      label: 'Favorite Items',
+      data: clickResults,
+      backgroundColor: 'red'
+    }],
+  };
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true,
+            // max: 100
+          }
+        }]
       }
-    });
-  }
+    }
+  });
 };
+
 Picture1.addEventListener('click', onClick);
 Picture2.addEventListener('click', onClick);
 Picture3.addEventListener('click', onClick);
