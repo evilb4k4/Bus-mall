@@ -15,5 +15,6 @@ img{
   padding: 20px;
 }
 div.imagesBlock{
-  margin-top: 50px;
+  padding-top: 50px;
+  margin: 0 15px;
 }
