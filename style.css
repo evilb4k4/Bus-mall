@@ -10,6 +10,10 @@ header{
 }
 img{
   width: 250px;
+  height: 190px;
   border: 5px solid #f5ebee;
   padding: 20px;
+}
+div.imagesBlock{
+  margin-top: 50px;
 }
