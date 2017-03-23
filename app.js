@@ -49,7 +49,22 @@ function randomImage(){
   prod3.imageShown++;
 };
 randomImage();
-
+//store previes chart data.
+function updatedTotal() {
+  if(localStorage.sumOfDataArray){
+    var someNewArray = JSON.parse(localStorage.sumOfDataArray);
+    for(var i = 0; i < someNewArray.length; i++){
+      picInfoArray[i].imageClick += someNewArray[i].imageClick;
+    }
+  }
+  if(localStorage.sumOfDataArray){
+    var someNewArray = JSON.parse(localStorage.sumOfDataArray);
+    for(var i = 0; i < someNewArray.length; i++){
+      picInfoArray[i].imageShown += someNewArray[i].imageShown;
+    }
+  }
+}
+updatedTotal();
 var clickLimit = 25;
 function onClick(event) {
   randomImage();
@@ -57,27 +72,31 @@ function onClick(event) {
   var productIdx = this.alt;
   picInfoArray[productIdx].imageClick++;
   if (totalClicks === clickLimit){
+    localStorage.sumOfDataArray = JSON.stringify(picInfoArray);
     Picture1.removeEventListener('click', onClick);
     Picture2.removeEventListener('click', onClick);
     Picture3.removeEventListener('click', onClick);
     productClicks();
+    showChart();
     console.log('it works');
   }
-
 }
 
 ////// chart.js
 
-// for(var i = 0; i < picInfoArray.length; i++){
-//   pictureNames.push(picInfoArray[i].itemName);
-// };
+var clickResults = [];
+var productShowResults = [];
 function productClicks() {
-  var clickResults = [];
   for(var i = 0; i < picInfoArray.length; i++){
     clickResults.push(picInfoArray[i].imageClick);
   };
   console.log('click results', clickResults);
-
+  for (var i = 0; i < picInfoArray.length; i++) {
+    productShowResults.push(picInfoArray[i].imageShown);
+  }
+  console.log('show results', productShowResults);
+};
+function showChart() {
   var ctx = canvas.getContext('2d');
   var data = {
     labels: pictureNames,
@@ -85,6 +104,10 @@ function productClicks() {
       label: 'Favorite Items',
       data: clickResults,
       backgroundColor: 'red'
+    }, {
+      label: 'Times Shown',
+      data: productShowResults,
+      backgroundColor: 'green'
     }],
   };
   var myChart = new Chart(ctx, {
