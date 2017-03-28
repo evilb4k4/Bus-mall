@@ -49,7 +49,6 @@ function randomImage(){
   prod3.imageShown++;
 };
 randomImage();
-//store previes chart data.
 function updatedTotal() {
   if(localStorage.sumOfDataArray){
     var someNewArray = JSON.parse(localStorage.sumOfDataArray);
@@ -78,23 +77,17 @@ function onClick(event) {
     Picture3.removeEventListener('click', onClick);
     productClicks();
     showChart();
-    console.log('it works');
   }
 }
-
-////// chart.js
-
 var clickResults = [];
 var productShowResults = [];
 function productClicks() {
   for(var i = 0; i < picInfoArray.length; i++){
     clickResults.push(picInfoArray[i].imageClick);
   };
-  console.log('click results', clickResults);
   for (var i = 0; i < picInfoArray.length; i++) {
     productShowResults.push(picInfoArray[i].imageShown);
   }
-  console.log('show results', productShowResults);
 };
 function showChart() {
   var ctx = canvas.getContext('2d');
